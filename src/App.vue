@@ -41,6 +41,8 @@ export default defineComponent({
 
 
 <style lang="scss">
+@import '@/assets/styles/reset';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
