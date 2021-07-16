@@ -1,10 +1,44 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <nav>
+    <button
+      v-if="isAuthenticated"
+      @click="logout"
+    >Logout</button>
+  </nav>
+
   <router-view/>
 </template>
+
+<script lang="ts">
+import { defineComponent, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import useAuthStore from './store/auth'
+import useUserAuthentificationController from './middleware/controllers/useUserAuthentificationController'
+
+export default defineComponent({
+  name: 'App',
+  setup() {
+    const { logout } = useUserAuthentificationController()
+
+    const { isAuthenticated } = useAuthStore()
+    const router = useRouter()
+
+    if (!isAuthenticated.value && router.currentRoute.value.meta?.requiresAuth) {
+      router.push('/')
+    }
+
+    watch(isAuthenticated, (c) => {
+      if (!c) router.push('/')
+    })
+
+    return {
+      logout,
+      isAuthenticated
+    }
+  },
+})
+</script>
+
 
 <style lang="scss">
 #app {
@@ -13,18 +47,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
