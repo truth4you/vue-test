@@ -5,7 +5,7 @@ import useAuthStore from '@/store/auth'
 
 
 const api = axios.create({
-  baseURL: 'https://master.freelanceinfluence.xyz:8087',
+  baseURL: 'https://003.freelanceinfluence.xyz:8087',
   withCredentials: true
 })
 
@@ -26,7 +26,7 @@ const paramsToQueryString = (params?: QueryParams) => {
 
   const queryArray: Array<string> = []
   for (const [k, v] of Object.entries(params)) {
-    if (v) {
+    if (v || v === 0) {
       if (Array.isArray(v)) {
         if (v.length) {
           Object.values(v).forEach((el) => {
