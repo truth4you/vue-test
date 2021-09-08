@@ -5,7 +5,7 @@ import useAuthStore from '@/store/auth'
 
 
 const api = axios.create({
-  baseURL: 'https://003.freelanceinfluence.xyz:8087',
+  baseURL: 'https://003.freelanceinfluence.xyz',
   withCredentials: true
 })
 
