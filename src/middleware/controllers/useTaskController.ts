@@ -40,8 +40,8 @@ const loadTasks = async (pageInfo: PageInfo | null, filter: TaskFilter | null) =
     skip: offset,
     limit: length,
     keywords: _filter.keywords,
-    minBudget: _filter.minBudget,
-    maxBudget: _filter.maxBudget,
+    budgetGreaterEqual: _filter.minBudget,
+    budgetLowerEqual: _filter.maxBudget,
     platforms: _filter.platforms
   }
   await api.get<TasksResposne>('tasks',{

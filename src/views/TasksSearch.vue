@@ -2,7 +2,9 @@
   <main>
     <h1>Tasks Search view</h1>
     <filter>
-      <input v-model="keyword">
+      <input v-model="keyword" placeholder="Search">
+      <input type="number" v-model="minBudget" placeholder="Min Budget">
+      <input type="number" v-model="maxBudget" placeholder="Max Budget">
       <label v-for="(platform,i) in PLATFORMS" :key="i">
         <input type="checkbox" :value="platform" v-model="platforms">
         {{platform}}
@@ -60,7 +62,9 @@ export default defineComponent({
     return {
       PLATFORMS: ['INSTAGRAM', 'YOUTUBE', 'TWITCH', 'OTHER'],
       platforms: [],
-      keyword: ''
+      keyword: '',
+      minBudget: '',
+      maxBudget: ''
     }
   },
   computed: {
@@ -96,6 +100,10 @@ export default defineComponent({
       this.keyword = filter.keywords.join(' ')
     if(filter.platforms)
       this.platforms = filter.platforms as []
+    if(filter.minBudget)
+      this.minBudget = String(filter.minBudget)
+    if(filter.maxBudget)
+      this.maxBudget = String(filter.maxBudget)
     const pageInfo: PageInfo = query as PageInfo
     if(!pageInfo.page)
       pageInfo.page = 1
@@ -120,6 +128,8 @@ export default defineComponent({
     },
     search() {
       const filter = {
+        minBudget: this.minBudget?parseFloat(this.minBudget):undefined,
+        maxBudget: this.maxBudget?parseFloat(this.maxBudget):undefined,
         keywords: this.keyword.trim().split(/\s+/),
         platforms: this.platforms
       }
@@ -130,6 +140,8 @@ export default defineComponent({
       const filter = {
         keywords: this.keyword.trim().split(/\s+/),
         platforms: this.platforms,
+        minBudget: this.minBudget,
+        maxBudget: this.maxBudget,
         page: this.pageInfo.page,
       }
       this.$router.push('/tasks-search'+paramsToQueryString(filter))
