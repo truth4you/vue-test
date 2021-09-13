@@ -20,6 +20,7 @@
           <th>budget</th>
           <th>proposal count</th>
           <th>platforms</th>
+          <th>added</th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +33,9 @@
             <td>{{task.proposalCount}}</td>
             <td>
               <span v-for="(i,p) in task.platforms" :class="i" :key="p"></span>
+            </td>
+            <td>
+              {{formatDate(task.addedTime)}}
             </td>
           </template>
         </tr>
@@ -145,6 +149,28 @@ export default defineComponent({
         page: this.pageInfo.page,
       }
       this.$router.push('/tasks-search'+paramsToQueryString(filter))
+    },
+    formatDate(date: Date) {
+      const now = new Date;
+      let diff = Math.ceil((now.getTime() - new Date(date).getTime()) / 60000)
+      if(diff==0)
+        return 'added now'
+      else if(diff<60)
+        return 'added ' + diff + (diff==1?' minute':' minutes') + ' ago'
+      else {
+        diff = Math.ceil(diff / 60)
+        if(diff<60)
+          return 'added ' + diff + (diff==1?' hour':' hours') + ' ago'
+        else {
+          diff = Math.ceil(diff / 24 / 30)
+          if(diff<12)
+            return 'added ' + diff + (diff==1?' month':' months') + ' ago'
+          else {
+            diff = Math.ceil(diff / 12)
+            return 'added ' + diff + (diff==1?' year':' years') + ' ago'
+          }
+        }
+      }
     }
   }
 })

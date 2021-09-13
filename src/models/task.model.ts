@@ -14,4 +14,5 @@ export interface TaskInfo {
   budget: CurrencyValue;
   proposalCount: number;
   platforms: Array<string>;
+  addedTime: Date;
 }
