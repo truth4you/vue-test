@@ -18,3 +18,99 @@ ul,
 ol { list-style: none; }
 
 a { text-decoration: none; }
+
+nav {
+  position: fixed;
+  height: 50px;
+  background: gray;
+  width: 100%;
+  button {
+    padding: 0px 20px;
+    line-height: 40px;
+    font-size: x-large;
+    float: right;
+    margin: 5px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    &::hover {
+      background: orange;
+      color: white;
+    }
+  }  
+}
+main {
+  padding: 70px 20px 20px 20px;
+  h1 {
+    position: fixed;
+    top: 0;
+    line-height: 50px;
+    left: 20px;
+    color: white;
+    font-style: italic;
+  }
+  filter {
+    input, button {
+      padding: 0.5em;
+      font-size: medium;
+    }
+    > * {
+      margin: 0 5px;
+    }
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    thead {
+      th {
+        background: #e9ecef;
+        padding: .75rem;
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+        border-bottom: 2px solid #dee2e6;
+        max-height: 2em;
+      }
+    }
+    tbody {
+      td {
+        padding: .75rem;
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+        span {
+          width: 1em;
+          height: 1em;
+          display: inline-block;
+          margin: 2px;
+          border-radius: 50%;
+          background-size: 100%;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+        span.INSTAGRAM {
+          background-image: url('./assets/instagram.webp');
+        }
+        span.YOUTUBE {
+          background-image: url('./assets/youtube.png');
+        }
+        span.TWITCH {
+          background-image: url('./assets/twitch.png');
+        }
+      }
+    }
+  }
+}
+
+pagination {
+  button {
+    padding: 0.5em;
+    min-width: 2.5em;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+    cursor: pointer;
+  }
+  button::hover {
+    background:orange;
+    color: white;
+  }
+}
